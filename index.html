@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<title>Правила</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap">
+<style>
+:root{color-scheme:light;--bg:#fff8f3;--card:#fff;--ink:#5a3b4a;--soft:#9a7a89;--pink:#ff8fb1;--yellow:#ffd44d;--gold:#e0a800;--line:#f6dfe4;--warn:#fff0d6;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 Nunito,system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:680px;margin:0 auto;padding:28px 18px 80px}
+svg{display:block;width:100%;height:100%}
+header{text-align:center;padding:24px 0 8px}
+.logo{width:64px;height:64px;margin:0 auto;cursor:pointer;color:var(--gold);transition:transform .3s;user-select:none}
+.logo svg{fill:var(--yellow)}
+.logo:hover{transform:rotate(18deg) scale(1.12)}
+h1{font-size:30px;margin:8px 0;font-weight:800}
+.sub{color:var(--soft);margin:0 auto;max-width:520px}
+.prog{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding:12px 0}
+.bar{height:12px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--yellow));border-radius:99px;transition:width .5s}
+.pl{font-size:14px;color:var(--soft);display:flex;justify-content:space-between;margin-top:4px}
+.ladder{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 8px}
+.ladder button{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:12px 4px;font:inherit;font-size:13px;color:var(--ink);cursor:pointer;transition:transform .2s}
+.ladder button:hover{transform:translateY(-3px)}
+.ladder b{display:block;width:28px;height:28px;margin:0 auto 4px;color:var(--pink)}
+#lt{min-height:48px;text-align:center;color:var(--soft);font-size:15px;margin:0 0 14px}
+details{background:var(--card);border:1px solid var(--line);border-radius:20px;margin:12px 0;transition:box-shadow .2s}
+details[open]{box-shadow:0 6px 22px rgba(255,143,177,.22)}
+summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+.em{width:44px;height:44px;flex:none;border-radius:14px;background:var(--line);color:var(--pink);padding:10px}
+.pl2{font-size:13px;color:var(--soft);display:block}
+.ti{font-weight:800;font-size:18px;line-height:1.25}
+.st{margin-left:auto;width:24px;height:24px;flex:none;color:var(--line);transition:.3s}
+details.done .st{color:var(--gold);transform:rotate(72deg)}
+details.done .st svg{fill:var(--yellow)}
+.body{padding:0 18px 18px}
+.body p{margin:0 0 10px}
+.pen{background:var(--warn);border-radius:14px;padding:10px 14px;font-size:15px;display:flex;gap:10px;align-items:flex-start}
+.pen i{width:20px;height:20px;flex:none;margin-top:2px;color:var(--gold)}
+.ok{margin-top:12px;background:var(--pink);color:#fff;border:0;border-radius:99px;padding:9px 18px;font:inherit;font-weight:700;cursor:pointer}
+details.done .ok{background:var(--yellow);color:#5a3b4a}
+.note{text-align:center;color:var(--soft);font-size:15px;margin-top:28px}
+.fin{display:none;align-items:center;justify-content:center;gap:10px;font-weight:800;font-size:20px;margin-top:20px;text-align:center}
+.fin.on{display:flex}
+.fin i{width:28px;height:28px;flex:none;color:var(--gold)}
+.fin i svg{fill:var(--yellow)}
+.conf{position:fixed;top:-30px;width:24px;height:24px;pointer-events:none;animation:fall 2.4s ease-in forwards;z-index:9}
+@keyframes fall{to{transform:translateY(110vh) rotate(360deg);opacity:.2}}
+@media (prefers-reduced-motion:reduce){.conf{animation-duration:.01s}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="logo" id="logo" data-i="star" title="Хлоп!"></div>
+<h1>Правила сообщества</h1>
+<p class="sub">Привет! Я Стивен! ★ Наше сообщество — как маленький городок у моря: здесь все друг другу друзья. Давай пройдёмся по местам и узнаем, как у нас заведено.</p>
+</header>
+
+<div class="prog"><div class="bar"><i id="fill"></i></div><div class="pl"><span id="cnt"></span><span>нажимай «Поняла/понял»</span></div></div>
+
+<div class="ladder">
+<button data-t="Предупреждение: я мягко подскажу, что пошло не так. Это самое первое, что бывает."><b data-i="msg"></b>Предупреждение</button>
+<button data-t="Пузырь: на время (1, 3 или 24 часа) ты отдыхаешь в пузыре и думаешь, как сделать лучше. Это тот самый РЧ."><b data-i="bubble"></b>Пузырь</button>
+<button data-t="Варп-пад: после 3-го пузыря тебя отправляют прочь (бан). Но можно подать апелляцию. После разбана повторное нарушение — навсегда."><b data-i="warp"></b>Варп-пад</button>
+</div>
+<p id="lt">Нажми на значок — расскажу, что это значит.</p>
+
+<div id="list"></div>
+
+<p class="fin" id="fin"><i data-i="star"></i><span>Ура! Ты прочитал(а) всё! Добро пожаловать в Бич-Сити!</span></p>
+
+<p class="note">Администрация может отправить в бан без объяснений.<br>Если наш городок тебе не по душе, ты всегда можешь тихо уйти. Но мы будем скучать.<br><br>Правила созданы для того, чтобы их соблюдать. ❤️</p>
+</main>
+<script>
+const P={
+star:'<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>',
+msg:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
+bubble:'<circle cx="12" cy="12" r="9"/><path d="M8 10a4.5 4.5 0 0 1 3-3"/>',
+warp:'<path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/>',
+home:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+donut:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>',
+heart:'<path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>',
+pen:'<path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/>',
+mute:'<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>',
+globe:'<circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>',
+repeat:'<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>',
+mega:'<path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/>',
+moon:'<path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>',
+bank:'<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+shield:'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="M12 8v4"/><path d="M12 16h.01"/>',
+book:'<path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>',
+smile:'<circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/>',
+info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>'};
+const I=n=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n]}</svg>`;
+const R=[
+{e:"home",p:"Храм у моря",t:"О чём наши посты",x:["★ Публикуйте то, что связано со Вселенной Стивена: арты, мемы, подборки, теории.","★ Нужна хотя бы одна картинка по теме. Щитпосты, поиск РП и посты без текста разрешены если есть тематическая картинка."],c:"Пост скрывается, вы получаете предупреждение. При повторе — пузырь на 3 часа."},
+{e:"donut",p:"Большой Пончик",t:"Общение без злости",x:["★ В чатах и комментариях общайтесь без злости. Если хочется поспорить, делайте это в личных сообщениях.","★ Если в ссору втянуто несколько человек, предупреждение получают все.","★ Новички, которые сразу приходят с агрессией, получают бан без предупреждения."],c:"Сообщение/комментарий удаляется, вы получаете предупреждение. При повторе — пузырь на 24 часа."},
+{e:"heart",p:"Маяк",t:"Шипы и вкусы",x:["★ Мы все любим разное, и это нормально! Любые пейринги по Вселенной Стивена имеют право на жизнь. Не высмеивайте чужие вкусы."],c:"Сообщение/комментарий удаляется, вы получаете предупреждение. При повторе — пузырь на 24 часа."},
+{e:"pen",p:"Сарай Перидот",t:"Честное творчество",x:["★ Нельзя выдавать за свои стихи и изображения созданные нейросетью.","★ Чужие работы нельзя выдавать за свои, всегда указывайте автора."],c:"Нейросеть: скрытие поста и предупреждение, при повторе — пузырь на 24 часа. Чужая работа: пузырь на 24 часа сразу, при повторе — бан (с возможностью разбана)."},
+{e:"mute",p:"Пиццерия «Рыбный суп»",t:"Мат",x:["★ Ругательства должны иметь цензуру в корне слова.","★ В нике, био, на аватарке или фоне мата быть не должно: пока не зацензурите, профиль будет скрыт."],c:"Пост или комментарий скрывается, вы получаете предупреждение."},
+{e:"globe",p:"Варп-пад",t:"Языки",x:["★ Наше сообщество - русскоязычное, поэтому придерживайтесь этого языка при общении.","★ Публикации на иностранном языке должны иметь перевод."],c:"Предупреждение, а если игнорировать — кик из чата. Пост без перевода скрывается."},
+{e:"repeat",p:"Парк «Фанленд»",t:"Спам",x:["★ Больше 5 одинаковых сообщений или стикеров за 30 секунд — слишком много.","★ При дубликате постов остаётся только последний."],c:"Предупреждение, при повторе — кик. Дубликаты скрываются. Рейды караются баном без возврата."},
+{e:"mega",p:"Рынок на пляже",t:"Ссылки и реклама",x:["★ Ссылки на сторонние ресурсы в профиле без явной цели сообщества скрываются (кроме указания автора оформления или арта).","★ Реклама чужих сообществ: перманентный бан без возврата."],c:"Профиль или пост скрываются, вы получаете предупреждение. При повторе — пузырь на 24 часа."},
+{e:"moon",p:"Комната Стивена",t:"Детское время (16+ и 18+)",x:["★ Эротика, намёки и поиск ЕРП в профиле не допускаются.","★ Посты и сообщения 16+ удаляются.","★ Аккаунты для ЕРП с 18+ материалами подвергаются мгновенному бану."],c:"Профиль: скрытие и предупреждение. Посты и чаты: пузырь на 1 час. При повторе — пузырь на 24 часа."},
+{e:"bank",p:"Ратуша мэра Дьюи",t:"Политика",x:["★ Обсуждение политики, пропаганды, острых идеологий и тяжёлых социальных тем запрещено.","★ В профилях не должно быть военной символики, флагов и политических лозунгов."],c:"Пост удаляется, пузырь на 24 часа без предупреждения. Профиль скрывается до исправления."},
+{e:"shield",p:"Лавка у Кластера",t:"Обман и шантаж",x:["★ Обман, вымогательство (денег, интимных фото), шантаж запрещены.","★ Продажа запрещённого контента, ботов, скриптов, кодов тоже."],c:"Перманентный бан без возможности разбана."},
+{e:"book",p:"Дом Кристальных Самоцветов",t:"Система пузырей",x:["Всего можно получить до 3 пузырей. После 3-го — бан с возможностью аппеляции.","При повторном нарушении бан становится перманентным."],c:"Мы всегда за то, чтобы сначала поговорить."},
+{e:"smile",p:"Пляж на закате",t:"Главное правило",x:["❤️ Будь добр(а) к другим, как ты бы хотел(а), чтобы были добры к тебе. Остальное — детали.","Мы все разные, но здесь каждому рады."],c:"Без наказаний, только объятия."}
+];
+const L=document.getElementById('list');
+R.forEach((r,i)=>{const d=document.createElement('details');
+d.innerHTML=`<summary><span class="em">${I(r.e)}</span><span><span class="pl2">${r.p}</span><span class="ti">${i+1}. ${r.t}</span></span><span class="st">${I('star')}</span></summary><div class="body">${r.x.map(s=>`<p>${s}</p>`).join('')}<div class="pen"><i>${I('info')}</i><span>${r.c}</span></div><button class="ok">Поняла/понял</button></div>`;
+d.querySelector('.ok').onclick=e=>{e.preventDefault();d.classList.toggle('done');if(d.classList.contains('done'))d.open=false;upd()};
+L.appendChild(d)});
+document.querySelectorAll('[data-i]').forEach(el=>el.innerHTML=I(el.dataset.i));
+const fill=document.getElementById('fill'),cnt=document.getElementById('cnt'),fin=document.getElementById('fin');
+function confetti(n){for(let i=0;i<n;i++){const s=document.createElement('span');s.className='conf';s.innerHTML=I(i%2?'star':'bubble');s.style.color=i%2?'#e0a800':'#ff8fb1';s.style.left=Math.random()*100+'vw';s.style.animationDelay=Math.random()*.6+'s';document.body.appendChild(s);setTimeout(()=>s.remove(),3200)}}
+function upd(){const n=document.querySelectorAll('details.done').length;fill.style.width=n/R.length*100+'%';cnt.textContent=`Прочитано ${n} из ${R.length}`;const all=n===R.length;if(all&&!fin.classList.contains('on'))confetti(30);fin.classList.toggle('on',all)}
+document.querySelectorAll('.ladder button').forEach(b=>b.onclick=()=>{document.getElementById('lt').textContent=b.dataset.t;confetti(4)});
+document.getElementById('logo').onclick=()=>confetti(8);
+upd();
+</script>
+</body>
+</html>
